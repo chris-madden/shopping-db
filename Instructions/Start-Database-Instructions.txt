@@ -1,0 +1,40 @@
+Starting and Logging Into Postgres Docker Container
+
+-----------
+Build Image
+-----------
+docker build -t c-postgres .
+
+------------------------
+Run Container From Image
+------------------------
+docker run -d \
+    --name postgres-container \
+    -e POSTGRES_PASSWORD=postgres \
+    -v /c/Users/chris_ek76h2p/Projects/Job-Hunt/Code-Projects/shopping-db/data:/var/lib/postgresql/data \
+    c-postgres
+
+---------------
+Start Container
+---------------
+docker start <con-id>
+
+------------------
+Log Into Container
+------------------
+winpty docker exec -it <con-id> bash
+
+-----------------
+Log Into Postgres
+-----------------
+psql -U postgres
+
+----------------------------------------------------------------
+Create Database (Should be done from dockerfile but not working)
+----------------------------------------------------------------
+CREATE DATABASE shopping_db;
+
+-----------------------------------------------
+Run Script From Container Root To Create Tables
+-----------------------------------------------
+psql -d shopping_db postgres -f shopping-db.sql
